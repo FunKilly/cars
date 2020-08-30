@@ -1,11 +1,11 @@
+import json
+import urllib.request
 
 from django.utils.translation import ugettext_lazy as _
-
 from rest_framework import serializers
+
 from .models import Car, Rating
 
-import urllib.request
-import json
 
 class CarCreateSerializer(serializers.ModelSerializer):
     class Meta:
@@ -20,7 +20,9 @@ class CarCreateSerializer(serializers.ModelSerializer):
         return data
 
     def get_models_for_make(self, make):
-        url = f"https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMake/{make}?format=json"
+        url = (
+            f"https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMake/{make}?format=json"
+        )
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
 
         response = urllib.request.urlopen(req).read()
