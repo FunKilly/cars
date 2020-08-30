@@ -8,7 +8,7 @@ from .models import Car, Rating
 from .serializers import (
     CarCreateSerializer,
     CarListSerializer,
-    PopularCarsSerializer,
+    PopularCarListSerializer,
     RatingCreateSerializer,
 )
 
@@ -28,7 +28,7 @@ class CarViewSet(
     }
 
 
-class RatingCreateApiView(generics.CreateAPIView):
+class RatingCreateView(generics.CreateAPIView):
     serializer_class = RatingCreateSerializer
 
     def create(self, request, *args, **kwargs):
@@ -45,12 +45,12 @@ class RatingCreateApiView(generics.CreateAPIView):
             )
         else:
             return Response(
-                "Specific car has not been found.", status=status.HTTP_404_NOT_FOUND
+                "Specific car has not been found.", status=status.HTTP_400_BAD_REQUEST
             )
 
 
-class PopularCarsApiView(generics.ListAPIView):
-    serializer_class = PopularCarsSerializer
+class PopularCarView(generics.ListAPIView):
+    serializer_class = PopularCarListSerializer
     queryset = (
         Car.objects.all().with_number_of_ratings().order_by("-number_of_ratings")[:10]
     )

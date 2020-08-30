@@ -27,7 +27,10 @@ class Car(models.Model):
         for field_name in ["brand", "model"]:
             val = getattr(self, field_name, False)
             if val:
-                setattr(self, field_name, val.capitalize())
+                try:
+                    setattr(self, field_name, val.capitalize())
+                except AttributeError:
+                    pass
         super(Car, self).save(*args, **kwargs)
 
 

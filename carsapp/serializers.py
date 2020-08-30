@@ -15,7 +15,7 @@ class CarCreateSerializer(serializers.ModelSerializer):
     def validate(self, data):
         models = self.get_models_for_make(data["brand"])
 
-        if data["model"].lower() not in models:
+        if str(data["model"]).lower() not in models:
             raise serializers.ValidationError("Model for make hasn't been found.")
         return data
 
@@ -51,7 +51,7 @@ class RatingCreateSerializer(serializers.ModelSerializer):
         fields = ("rate", "car_id")
 
 
-class PopularCarsSerializer(serializers.ModelSerializer):
+class PopularCarListSerializer(serializers.ModelSerializer):
     number_of_ratings = serializers.SerializerMethodField()
 
     class Meta:

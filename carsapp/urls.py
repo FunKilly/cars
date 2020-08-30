@@ -1,14 +1,14 @@
 from django.urls import path
 from rest_framework import routers
 
-from .views import CarViewSet, PopularCarsApiView, RatingCreateApiView
+from .views import CarViewSet, PopularCarView, RatingCreateView
 
 router = routers.SimpleRouter()
 router.register(r"cars", CarViewSet)
 
 urlpatterns = [
-    path("rate/", RatingCreateApiView.as_view(), name="rate"),
-    path("popular", PopularCarsApiView.as_view(), name="popular"),
+    path("rate/", RatingCreateView.as_view(), name="rate"),
+    path("popular", PopularCarView.as_view(), name="popular"),
 ]
 
 urlpatterns += router.urls
