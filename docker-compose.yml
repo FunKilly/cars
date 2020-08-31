@@ -17,9 +17,9 @@ services:
       context: .
       dockerfile: Dockerfile
     restart: unless-stopped
-    command: bash -c " python manage.py runserver 0.0.0.0:8002"
-    ports:
-      - "8002:8002"
+    command: gunicorn cars.wsgi:application --bind 0.0.0.0:8000
+    expose:
+      - 8000
     volumes:
       - .:/app
       - ./tests:/app/tests
@@ -30,6 +30,13 @@ services:
       - .env
     stdin_open: true
     tty: true
+
+  nginx:
+    build: ./nginx
+    ports:
+      - 8000:80
+    depends_on:
+      - cars-api
 
 volumes:
   postgres_volume:
