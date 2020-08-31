@@ -31,12 +31,6 @@ def autoflake(c):
     options = ["--in-place --remove-all-unused-imports --remove-unused-variables"]
     c.run(f"find . -name '*.py'|grep -v migrations|xargs autoflake {' '.join(options)}")
 
-@task 
-def autoflake(c):
-    options = ["--in-place --remove-all-unused-imports --remove-unused-variables"]
-    c.run(f"find . -name '*.py'|grep -v migrations|xargs autoflake {' '.join(options)}")
-
-
 @task
 def precommit(c):
     isort(c)
