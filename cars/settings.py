@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import pathlib
 
-from envparse import env
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,10 +22,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("SECRET_KEY", default="foo")
+SECRET_KEY = os.environ.get("SECRET_KEY", default="foo")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(env("DEBUG", default="False"))
+DEBUG = bool(os.environ.get("DEBUG", default="False"))
 
 ALLOWED_HOSTS = ["*"]
 
@@ -54,7 +53,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "carsapp.urls"
+ROOT_URLCONF = "cars.urls"
 
 TEMPLATES = [
     {
@@ -130,8 +129,8 @@ USE_TZ = True
 
 PUBLIC_ROOT = pathlib.Path(BASE_DIR, "public")
 
-MEDIA_ROOT = env("MEDIA_ROOT", default=str(pathlib.Path(PUBLIC_ROOT, "media")) + "/")
-STATIC_ROOT = env("STATIC_ROOT", default=str(pathlib.Path(PUBLIC_ROOT, "static")) + "/")
+MEDIA_ROOT = os.environ.get("MEDIA_ROOT", default=str(pathlib.Path(PUBLIC_ROOT, "media")) + "/")
+STATIC_ROOT = os.environ.get("STATIC_ROOT", default=str(pathlib.Path(PUBLIC_ROOT, "static")) + "/")
 
-MEDIA_URL = env("MEDIA_URL", default=str(pathlib.Path(PUBLIC_ROOT, "media")) + "/")
-STATIC_URL = env("STATIC_URL", default=str(pathlib.Path(PUBLIC_ROOT, "static")) + "/")
+MEDIA_URL = os.environ.get("MEDIA_URL", default=str(pathlib.Path(PUBLIC_ROOT, "media")) + "/")
+STATIC_URL = os.environ.get("STATIC_URL", default=str(pathlib.Path(PUBLIC_ROOT, "static")) + "/")

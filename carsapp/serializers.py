@@ -1,6 +1,7 @@
 import json
 import urllib.request
 
+from django.utils.translation import ugettext_lazy as _
 from rest_framework import serializers
 
 from .models import Car, Rating
@@ -10,6 +11,13 @@ class CarCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Car
         fields = ("brand", "model")
+        validators = [
+            serializers.UniqueTogetherValidator(
+                queryset=Car.objects.all(),
+                fields=("brand", "model"),
+                message=_("The specified car already exists in the system."),
+            )
+        ]
 
     def validate(self, data):
         models = self.get_models_for_make(data["brand"])
@@ -41,7 +49,7 @@ class CarListSerializer(serializers.ModelSerializer):
         fields = ("id", "brand", "model", "avarage_rating")
 
     def get_avarage_rating(self, obj):
-        return obj.avarage_rating
+        return obj.avarage_rating or 0
 
 
 class RatingCreateSerializer(serializers.ModelSerializer):
