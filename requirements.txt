@@ -13,7 +13,6 @@ distlib==0.3.1            # via virtualenv
 dj_database_url==0.5.0    # via -r requirements.in
 django==3.0.4             # via -r requirements.in, djangorestframework
 djangorestframework==3.11.0  # via -r requirements.in
-envparse==0.2.0           # via -r requirements.in
 filelock==3.0.12          # via tox, virtualenv
 gunicorn==19.9.0          # via -r requirements.in
 invoke==1.4.1             # via -r requirements.in
