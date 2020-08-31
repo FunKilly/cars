@@ -49,7 +49,10 @@ class CarListSerializer(serializers.ModelSerializer):
         fields = ("id", "brand", "model", "avarage_rating")
 
     def get_avarage_rating(self, obj):
-        return obj.avarage_rating or 0
+        if obj.avarage_rating is None:
+            return 0
+        else:
+            return round(obj.avarage_rating, 2)
 
 
 class RatingCreateSerializer(serializers.ModelSerializer):
