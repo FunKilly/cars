@@ -2,8 +2,7 @@ from unittest.mock import patch
 
 from django.test import TestCase
 
-from carsapp.models import Car
-from carsapp.serializers import CarCreateSerializer, CarListSerializer
+from carsapp.serializers import CarCreateSerializer
 
 
 def get_models_for_make(make):

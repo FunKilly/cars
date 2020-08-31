@@ -7,3 +7,4 @@ black==19.10b0
 invoke==1.4.1
 isort==4.3.21
 gunicorn==19.9.0
+dj_database_url

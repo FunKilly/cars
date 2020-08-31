@@ -1,10 +1,8 @@
-from django.shortcuts import render
 from rest_framework import generics, mixins, status, viewsets
-from rest_framework.generics import ListCreateAPIView
 from rest_framework.response import Response
 
 from .mixins import GetSerializerClassMixin
-from .models import Car, Rating
+from .models import Car
 from .serializers import (
     CarCreateSerializer,
     CarListSerializer,

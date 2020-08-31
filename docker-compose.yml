@@ -2,7 +2,6 @@ version: "3.3"
 
 services:
   db:
-    container_name: cars-db
     image: postgres:12.2
     ports:
       - "5435:5433"
@@ -11,8 +10,7 @@ services:
     env_file:
       - .env
 
-  cars-api: &cars
-    container_name: cars-api
+  web:
     build:
       context: .
       dockerfile: Dockerfile
@@ -36,7 +34,7 @@ services:
     ports:
       - 8000:80
     depends_on:
-      - cars-api
+      - web
 
 volumes:
   postgres_volume:

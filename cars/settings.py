@@ -78,18 +78,26 @@ WSGI_APPLICATION = "cars.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+import dj_database_url
+
+
 DATABASES = {
     "default": {
-        "ENGINE": env(
+        "ENGINE": os.environ.get(
             "DATABASE_BACKEND", default="django.db.backends.postgresql_psycopg2"
         ),
-        "NAME": env("POSTGRES_DB", default="postgres"),
-        "HOST": env("POSTGRES_HOST", default="db"),
-        "USER": env("POSTGRES_USER", default="postgres"),
-        "PASSWORD": env("POSTGRES_PASSWORD", default="postgres"),
-        "ATOMIC_REQUESTS": True,
+        "NAME": os.environ.get("POSTGRES_DB", default="postgres"),
+        "HOST": os.environ.get("POSTGRES_HOST", default="db"),
+        "USER": os.environ.get("POSTGRES_USER", default="postgres"),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD", default="postgres"),
+        'PORT': os.environ.get('POSTGRES_PORT', '5432'),
     },
 }
+
+db_from_env = dj_database_url.config()
+
+DATABASES['default'].update(db_from_env)
+DATABASES['default']['CONN_MAX_AGE'] = 500
 
 
 # Password validation

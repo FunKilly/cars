@@ -8,8 +8,6 @@ WORKDIR /app
 RUN pip install pip-tools
 COPY requirements.txt /app/
 RUN pip install -r requirements.txt
-COPY ./entrypoint.sh /app/entrypoint.sh
 COPY . /app/
-
 
 CMD gunicorn cars.wsgi:application --bind 0.0.0.0:$PORT

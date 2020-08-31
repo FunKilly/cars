@@ -1,9 +1,7 @@
 import uuid
-from datetime import datetime
 
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-from django.db.models import Avg
 
 from .managers import CarManager
 from .mixins import CICharField
